@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActions from '@material-ui/core/CardActions';
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import * as Constants from '../constants';
 
 export default class BreedDetail extends Component {
@@ -28,7 +37,6 @@ export default class BreedDetail extends Component {
     this.setState({
       breedId: name,
       breedName: displayName,
-      isLoading: true,
     });
 
     this.getBreedImage(name);
@@ -37,15 +45,14 @@ export default class BreedDetail extends Component {
   getBreedImage = id => {
     let nextState = {};
 
+    // reset loadingError and set isLoading to true while fetch is executing
+    this.setState({ isLoading: true, loadingError: null });
+
     // fetch random image of this dog breed
     fetch(`${Constants.DOG_API_URL}/breed/${id}/images/random`)
     .then(raw => raw.json())
     .then(breed => nextState.imgUrl = breed.message)
-    .catch(err => {
-      // TODO: surface error to UI
-      console.log(err);
-      nextState.loadingError = err.message || err;
-    })
+    .catch(err => nextState.loadingError = err.message || err)
     .finally(() => {
       nextState.isLoading = false;
       this.setState(nextState);
@@ -53,19 +60,45 @@ export default class BreedDetail extends Component {
   }
 
   render() {
-    const { breedId, breedName, imgUrl } = this.state;
-
-    // TODO: add error check and surface error here
-    if (!breedId) return <div className="no-breed">Breed is loading or no breed specified</div>
+    const { breedId, breedName, imgUrl, isLoading, loadingError } = this.state;
 
     return (
       <div className="breed-detail">
-        <h1>{breedName}</h1>
-        {imgUrl && <img src={imgUrl} alt={`${breedName} dog breed`}/>}
-        <div className="controls">
-          <Link to="/" className="pull-left">Back</Link>
-          <Link to="#" className="pull-right" onClick={() => this.getBreedImage(breedId)}>Refresh</Link>
-        </div>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="h6">{breedName}</Typography>
+          </Toolbar>
+        </AppBar>
+        <Container className="card" maxWidth="xs">
+          <Card>
+            {imgUrl && <CardMedia image={imgUrl} title={breedName}/>}
+            {(!imgUrl || loadingError) && (
+              <div className="no-image">
+                {`${loadingError || 'Loading...'}`}
+              </div>
+            )}
+            <CardActions>
+              <Fab
+                variant="extended"
+                size="medium"
+                color="primary"
+                title="Go back"
+                href="/">
+                <Icon>chevron_left</Icon>
+                Back to list
+              </Fab>
+              <Fab
+                variant="extended"
+                size="medium"
+                color="primary"
+                title="Load new image"
+                onClick={() => this.getBreedImage(breedId)}>
+                <Icon>refresh</Icon>
+              </Fab>
+              {isLoading && <CircularProgress size={30} className="breed-refresh"/>}
+            </CardActions>
+          </Card>
+        </Container>
       </div>
     )
   }
