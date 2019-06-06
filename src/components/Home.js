@@ -88,7 +88,7 @@ export default class Home extends Component {
                     </ListItemIcon>
                     <ListItemText primary={breedName}/>
                   </ListItem>
-                  <Divider variant="inset"/>
+                  <Divider/>
                 </div>
               );
             })}
