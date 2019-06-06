@@ -19,3 +19,30 @@ body {
   box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.75);
   margin-top: 15px;
 }
+
+.breed-detail .no-image {
+  text-align: center;
+  margin: 15px auto;
+}
+
+.card .MuiCard-root {
+  max-width: 360px;
+  margin-top: 15px;
+}
+
+.breed-detail .MuiCardMedia-root {
+  height: 400px;
+}
+
+.MuiButtonBase-root.MuiFab-root {
+  margin: 5px;
+}
+
+.MuiCardActions-root {
+  position: relative;
+}
+
+.MuiCircularProgress-root.breed-refresh {
+  position: absolute;
+  right: 15px;
+}
