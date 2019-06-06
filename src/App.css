@@ -11,6 +11,40 @@ body {
   }
 }
 
+.home .MuiAppBar-root,
+.breed-detail .MuiAppBar-root {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 444px;
+}
+
+h6.MuiTypography-h6 {
+  width: 100%;
+  text-align: center;
+}
+
+.MuiContainer-root.breed-list-container,
+.MuiContainer-root.card {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+@media only screen and (min-width: 600px) {
+  .MuiContainer-root.breed-list-container,
+  .MuiContainer-root.card {
+    padding-left: 0;
+    padding-right: 0px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .MuiContainer-root.breed-list-container,
+  .MuiContainer-root.card {
+    padding-left: 0;
+    padding-right: 0px;
+  }
+}
+
 .breed-list-container {
   width: 100%;
   max-width: 360px;
@@ -26,7 +60,7 @@ body {
 }
 
 .card .MuiCard-root {
-  max-width: 360px;
+  max-width: 444px;
   margin-top: 15px;
 }
 
