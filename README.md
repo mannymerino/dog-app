@@ -15,7 +15,12 @@ Clone this repository locally, then run the following commands within the applic
 npm install
 npm start
 ```
+### Tests
+```
+npm run test
+```
 ## Future Improvements / Features
 - [ ] Sorting of breeds list
 - [ ] Group sub-breeds by breed (this would fix sorting issue)
 - [ ] Scale breed image to fit
+- [ ] Add paging to breeds list for improved performance
