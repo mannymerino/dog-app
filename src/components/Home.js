@@ -12,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 
-const Home = ({breeds}) => {
+const Home = ({breeds, loadingError}) => {
   return (
     <div className="home">
       <AppBar position="static" color="default">
@@ -22,25 +22,28 @@ const Home = ({breeds}) => {
       </AppBar>
       <Container
         className="breed-list-container" maxWidth="xs">
-        <List>
-          {breeds.map((breed, index) => {
-            const { breedId, breedName } = breed;
-            return (
-              <div key={index}>
-                <ListItem
-                  button
-                  component={Link}
-                  to={`/breed/${breedId}`}>
-                  <ListItemIcon>
-                    <Icon>pets</Icon>
-                  </ListItemIcon>
-                  <ListItemText primary={breedName}/>
-                </ListItem>
-                <Divider/>
-              </div>
-            );
-          })}
-        </List>
+        {loadingError && <div className="error-message">{loadingError}</div>}
+        {!loadingError && (
+          <List>
+            {breeds.map((breed, index) => {
+              const { breedId, breedName } = breed;
+              return (
+                <div key={index}>
+                  <ListItem
+                    button
+                    component={Link}
+                    to={`/breed/${breedId}`}>
+                    <ListItemIcon>
+                      <Icon>pets</Icon>
+                    </ListItemIcon>
+                    <ListItemText primary={breedName}/>
+                  </ListItem>
+                  <Divider/>
+                </div>
+              );
+            })}
+          </List>
+        )}
       </Container>
     </div>
   )
@@ -48,10 +51,15 @@ const Home = ({breeds}) => {
 
 Home.propTypes = {
   breeds: PropTypes.arrayOf(PropTypes.object),
+  loadingError: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
 };
 
 Home.defaultProps = {
   breeds: [],
+  loadingError: null,
 };
 
 export default Home;

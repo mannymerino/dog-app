@@ -12,6 +12,7 @@ export default class App extends Component {
 
     this.state = {
       breeds: [],
+      loadingError: null,
     };
   }
 
@@ -20,10 +21,7 @@ export default class App extends Component {
     fetch(`${Constants.DOG_API_URL}/breeds/list/all`)
     .then(raw => raw.json())
     .then(breeds => this.setState({breeds: this.mapBreeds(breeds.message)}))
-    .catch(err => {
-      // TODO: surface error to UI
-      console.log(err);
-    });
+    .catch(err => this.setState({loadingError: err.message || err}));
   }
 
   mapBreeds = breeds => {
@@ -56,11 +54,17 @@ export default class App extends Component {
   }
 
   render() {
+    const { breeds, loadingError } = this.state;
+    const homeProps = {
+      breeds,
+      loadingError
+    };
+
     return (
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route exact path='/' render={props => <Home {...props} breeds={this.state.breeds}/>} />
+            <Route exact path='/' render={props => <Home {...props} {...homeProps}/>} />
             <Route path='/breed/:name' component={Breed} />
           </Switch>
         </div>
