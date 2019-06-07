@@ -9,7 +9,7 @@ There’s a bourgeoning market for dog pictures! This React app helps us visuali
   * Navigate back to the list of breeds
 ## Usage
 *(This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app))*
-
+### Install and Run
 Clone this repository locally, then run the following commands within the application folder:
 ```npm
 npm install
