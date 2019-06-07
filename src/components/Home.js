@@ -19,7 +19,6 @@ export default class Home extends Component {
 
     this.state = {
       breeds: [],
-      breed: null,
     };
   }
 
