@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -43,6 +44,14 @@ const Home = ({breeds}) => {
       </Container>
     </div>
   )
+};
+
+Home.propTypes = {
+  breeds: PropTypes.arrayOf(PropTypes.object),
+};
+
+Home.defaultProps = {
+  breeds: [],
 };
 
 export default Home;
