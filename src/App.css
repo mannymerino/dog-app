@@ -80,3 +80,8 @@ h6.MuiTypography-h6 {
   position: absolute;
   right: 15px;
 }
+
+.error-message {
+  padding: 15px 10px;
+  color: #F44336;
+}
