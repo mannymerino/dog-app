@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -83,7 +84,8 @@ export default class BreedDetail extends Component {
                 size="medium"
                 color="primary"
                 title="Go back"
-                href="/">
+                component={Link}
+                to="/">
                 <Icon>chevron_left</Icon>
                 Back to list
               </Fab>

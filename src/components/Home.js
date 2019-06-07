@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -81,8 +82,8 @@ export default class Home extends Component {
                 <div key={index}>
                   <ListItem
                     button
-                    component="a"
-                    href={`/breed/${breedId}`}>
+                    component={Link}
+                    to={`/breed/${breedId}`}>
                     <ListItemIcon>
                       <Icon>pets</Icon>
                     </ListItemIcon>
