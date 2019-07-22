@@ -36,7 +36,7 @@ export default class App extends Component {
       if (hasSubBreeds) {
         breed.forEach(sb => {
           mappedBreeds.push({
-            breedId: `${cur}-${sb}`,
+            breedId: `${cur}/${sb}`,
             breedName: `${sb} ${cur}`
           });
         })
