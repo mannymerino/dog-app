@@ -33,7 +33,7 @@ export default class BreedDetail extends Component {
     // if name is hyphenated, then it is <breed>-<subbreed>
     // parse name for better display
     let displayName = name;
-    if (displayName.indexOf('-') >= 0) displayName = name.split('-').reverse().join(' ');
+    if (displayName.indexOf('/') >= 0) displayName = name.split('/').reverse().join(' ');
 
     this.setState({
       breedId: name,
